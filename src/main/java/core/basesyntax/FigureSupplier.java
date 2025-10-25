@@ -10,30 +10,32 @@ public class FigureSupplier {
     private final ColorSupplier colorSupplier = new ColorSupplier();
 
     public Figure getRandomFigure() {
-        int typeOfFigure = random.nextInt(FIGURE_COUNT);
-        int randInt1 = 1 + random.nextInt(MAX_DIMENSION);
-        int randInt2 = 1 + random.nextInt(MAX_DIMENSION);
-        int randInt3 = 1 + random.nextInt(MAX_DIMENSION);
-        double randDouble = 1 + random.nextDouble() * MAX_DIMENSION;
-
-        switch (typeOfFigure) {
+        switch (getRandomInteger(FIGURE_COUNT)) {
             case 0:
-                return new Square(colorSupplier.getRandomColor(), randInt1);
+                return new Square(colorSupplier.getRandomColor(), getRandomInteger(MAX_DIMENSION));
             case 1:
-                return new Rectangle(colorSupplier.getRandomColor(), randInt1, randInt2);
+                return new Rectangle(colorSupplier.getRandomColor(), getRandomInteger(MAX_DIMENSION), getRandomInteger(MAX_DIMENSION));
             case 2:
-                return new RightTriangle(colorSupplier.getRandomColor(), randInt1, randInt2);
+                return new RightTriangle(colorSupplier.getRandomColor(), getRandomInteger(MAX_DIMENSION), getRandomInteger(MAX_DIMENSION));
             case 3:
-                return new Circle(colorSupplier.getRandomColor(), randDouble);
+                return new Circle(colorSupplier.getRandomColor(), getRandomDouble());
             case 4:
-                return new IsoscelesTrapezoid(colorSupplier.getRandomColor(), randInt1,
-                        randInt2, randInt3);
+                return new IsoscelesTrapezoid(colorSupplier.getRandomColor(), getRandomInteger(MAX_DIMENSION),
+                        getRandomInteger(MAX_DIMENSION), getRandomInteger(MAX_DIMENSION));
             default:
                 return getDefaultFigure();
         }
     }
 
     public Figure getDefaultFigure() {
-        return new Circle(Colors.WHITE.name().toLowerCase(), RADIUS);
+        return new Circle(Color.WHITE.name().toLowerCase(), RADIUS);
+    }
+
+    private int getRandomInteger(int value) {
+        return 1 + random.nextInt(value);
+    }
+
+    private double getRandomDouble() {
+        return 1 + random.nextDouble() * FigureSupplier.MAX_DIMENSION;
     }
 }
