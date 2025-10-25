@@ -8,7 +8,8 @@ public class Main {
         Figure[] figures = new Figure[ARRAY_LENGTH];
 
         for (int i = 0; i < ARRAY_LENGTH; i++) {
-            figures[i] = (i < 3) ? figureSupplier.getRandomFigure() : figureSupplier.getDefaultFigure();
+            figures[i] = (i < 3) ? figureSupplier.getRandomFigure()
+                    : figureSupplier.getDefaultFigure();
         }
 
         for (Figure figure : figures) {
